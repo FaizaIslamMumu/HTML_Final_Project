@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Pet Food Website Design Tutorial</title>
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://kit.fontawesome.com/500ed785c2.js" crossorigin="anonymous"></script>
+    
+    <style>
+        body{
+            background-color:lightgray;
+        }
+        .about .row {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+            .about .row .image {
+                flex: 1 1 45rem;
+            }
+
+                .about .row .image img {
+                    width: 100%;
+                    top:-100px;
+                }
+
+            .about .row .content {
+                flex: 1 1 45rem;
+                padding: 2rem;
+            }
+
+                .about .row .content h3 {
+                    font-size: 3rem;
+                    justify-content:center;
+                    text-align:center;
+                    background-color:brown;
+                    margin-top:-35px;
+                    
+                }
+
+                .about .row .content p {
+                    font-size: 1.6rem;
+                    color: black;
+                    padding: 1rem 0;
+                    margin-top: -50px;
+                    line-height: 1.8;
+                }
+        #menu ul {
+            list-style: none;
+            display:flex;
+            width:100%;
+            padding:10px;
+            color: black;
+            font-weight: 700;
+            background-color: antiquewhite;
+            justify-content:center;
+            margin-right:100px;
+            
+        }
+
+            #menu ul li {
+                margin: 20px;
+                padding: 15px;
+                height: 10px;
+                width: auto;
+                
+            }
+
+                #menu ul li a {
+                    text-decoration: none;
+                    color: darkblue;
+                    font-size: 20px;
+                    font-weight: 800;
+                    width: auto;
+                }
+
+                #menu ul li:hover {
+                    background-color: #b7abab;
+                    border-radius: 40px;
+                }
+        
+    </style>
+
+</head>
+
+<body>
+    <div id="menu">
+        <ul>
+            <li><a href="home.html"><i class="fa-solid fa-house-user"></i>HOME</a></li>
+            <li><a href="products.html"><i class="fa-solid fa-tag"></i>PRODUCT LIST</a></li>
+            <li><a href="#"><i class="fa-sharp fa-solid fa-address-card"></i>ABOUT US</a></li>
+            <li><a href="contact.html"><i class="fa-sharp fa-solid fa-envelopes-bulk"></i>CONTACT US</a></li>
+
+        </ul>
+    </div>
+    <!-- about section starts  -->
+
+    <section class="about" id="about">
+
+        <div class="row">
+            <div class="image">
+                <img src="image/animals-2222007__340.webp" alt="">
+            </div>
+            <div class="content">
+                <h3>Why Buy Your Pet Food From Us?</h3>
+                <p>
+                    Our government is able to decide what goes up for sale, but it can’t control the way other countries manufacture their goods. When importing foods from places like Canada and China, generally, the FDA judges the product by the label and decides whether or not it’s safe to consume. In the U.S., government agencies such as the FDA and the USDA are able to thoroughly inspect facilities and make sure that standards and proper procedures are being followed. While foreign companies are able to produce a label that meets protocol, there’s no telling whether or not it’s true. You don’t really know what’s in it, or whether the place it was made is safe or clean.
+
+                    This is not only important for the purpose of ensuring the food has healthy ingredients, but also to prevent harmful things like glass and pieces of metal from getting mixed in as well.
+                </p>
+               
+                <a href="#" class="btn">learn more</a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- about section ends -->
+</body>
+</html>

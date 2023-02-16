@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Pet Food Website Design Tutorial</title>
+
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/500ed785c2.js" crossorigin="anonymous"></script>
+    <style>
+        .header{
+            width:100%;
+            height:auto;
+            background-color:#353333;
+            color:antiquewhite;
+        }
+        #wr{
+            
+            text-align:center;
+            padding:10px;
+            font-weight:bolder;
+        }
+        #spn{
+            background-color:#ffd800;
+            font-size:30px;
+            font-weight:900;
+            text-align:center;
+            color:darkcyan;
+        }
+        .cart {
+            padding: 30px 500px 30px 500px;
+            background-color: #353333;
+            height: 300px;
+            width: contain;
+            margin-top: 50px;
+        }
+        .cart-header {
+            display: flex;
+            justify-content:space-around;
+            padding:10px 0px;
+            text-align: center;
+            background-color: yellow;
+            color: darkcyan;
+        }
+
+        .cart-header div{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color:#0094ff;
+        }
+            .cart-item div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* item info */
+            .cart-item .item-info {
+                flex: 1;
+                background-color: antiquewhite;
+                border-radius: 0 10px 10px 0;
+                padding: 10px;
+            }
+                .cart-item .item-info:hover {
+                    background-color: rgba(255, 0, 0, 0.6);
+                    cursor: pointer;
+                }
+
+                .cart-item .item-info img {
+                    width: 100px;
+                    height:200px;
+                    background-color:antiquewhite;
+                }
+            /* unit price */
+            .cart-item .unit-price {
+                flex: 1;
+                font-size: 1.2rem;
+                border-radius: 0 10px 10px 0;
+            }
+            /* units */
+            .cart-item .units {
+                flex: 1;
+               
+            }
+
+                .cart-item .units .number {
+                    margin: 0 10px;
+                    font-size: 1.2rem;
+                }
+
+                .cart-item .units .btn {
+                    width: 20px;
+                    height: 20px;
+                    background-color: rgba(255, 0, 0, 0.6);
+                    border-radius: 50%;
+                    font-weight: bold;
+                    cursor: pointer;
+                   
+                }
+
+        /* cart footer */
+        .cart-footer {
+            width: 100%;
+            background-color: rgb(255, 21, 21);
+            position: absolute;
+            bottom: 0;
+            
+            left: 0px;
+           
+        }
+        .cart-item .unit-price{
+            background-color:antiquewhite;
+        }
+            .cart-item .unit-price:hover {
+                background-color: rgba(255, 0, 0, 0.6);
+                cursor: pointer;
+            }
+
+
+        .cart-footer div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+            font-size: 1.3rem;
+            
+        }
+
+            .cart-footer .subtotal {
+                background-color: white;
+            }
+
+        .cart-footer .checkout {
+            background-color: #ffd800;
+            display: flex;
+            margin-left: 450px;
+            font-size: 30px;
+            font-weight: 700;
+        }
+    </style>
+
+</head>
+<body>
+    <header class="header">
+        <div id="wr">
+            <h1>No Worries, You Can Trust Us!!!</h1>
+            <div>
+                <span id="spn">PLACE YOUR ORDER!</span>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="cart">
+        <div class="cart-header">
+            <div class="column1">Item</div>
+            <div class="column2">Unit price</div>
+            <div class="column3">Units</div>
+        </div>
+        <div class="cart-items">
+            <!--cart items here -->
+            <div class="cart-item">
+                <div class="item-info">
+                    <!--<img src="./img/t1.png" alt="t-shirt 1">
+                    <h4>T-shirt 1</h4>-->
+                </div>
+                <div class="unit-price">
+                    <!--<small>$</small>29.99-->
+                </div>
+                <div class="units">
+                    <div class="btn minus">-</div>
+                    <div class="number">1</div>
+                    <div class="btn plus">+</div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="subtotal">
+                Subtotal (0 items): $0
+            </div>
+            <button class="checkout"><a href="payment gateway/paymentGetway.html"</a>
+                PROCCED TO CHECKOUT
+            </button>
+
+        </div>
+    </div>
+
+   
+   
+</body>
+</html>

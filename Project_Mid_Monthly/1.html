@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index Db</title>
+    <style type="text/css">
+        body {
+            font-family: "Century Gothic";
+            font-size: .9em;
+        }
+
+        #container {
+            width: 980px;
+            margin: 20px auto;
+        }
+
+        #left {
+            width: 680px;
+            float: left;
+            padding: 5px 10px 5px 0;
+        }
+
+        #right {
+            width: 280px;
+            float: right;
+            padding-left: 10px;
+        }
+
+        .label {
+            display: block;
+            font-weight: 700;
+        }
+
+        input[type=text] {
+            border: 1px solid #ccc;
+        
+        }
+
+        #tbl {
+            width: 100%;
+            border: 1px solid #ccc;
+        }
+
+            #tbl th {
+                border-right: 1px solid #ededed;
+                border-bottom: 1px solid #ededed;
+            }
+
+            #tbl td {
+                border-right: 1px solid #ededed;
+                border-bottom: 1px solid #ededed;
+            }
+
+        .edit {
+            background-color: green;
+            color: white;
+        }
+
+        .delete {
+            background-color: red;
+            color: white;
+        }
+    </style>
+    <script src="Scripts/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div id="container">
+        <div id="left">
+            <h2>Contacts Book</h2>
+            <table id="tbl" cellpadding="3" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Imagepath</th>
+                        <th>Price</th>
+                        
+                        <th>----</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div id="right">
+            <h2>Add New</h2>
+            <div>
+                <label class="label">Name</label>
+                <input type="text" id="name" />
+            </div>
+            <div>
+                <label class="label">Imagepath</label>
+                <input type="text" id="path" />
+            </div>
+            <div>
+                <label class="label">Price</label>
+                <input type="text" id="price" />
+            </div>
+            <div>
+                <input type="button" id="add" value="Add New" />
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+        window.IDBCursor = window.IDBCursor || window.webkitIDBCursor;
+        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+        var db;
+        var currentEdit = null;
+
+        $(document).ready(function () {
+            var openReq = indexedDB.open("PetDB", 1);
+            openReq.onupgradeneeded = function (e) {
+                db = e.target.result;
+
+                var store = db.createObjectStore("petTbl", { keyPath: "id", autoIncrement: true });
+                console.log(store);
+            }
+
+            openReq.onsuccess = function (e) {
+                db = e.target.result;
+                console.log(db);
+                readAll();
+
+                //Add Data
+                $("#add").click(function () {
+                    if ($("#name").val() != "" && $("#path").val() != "" && $("#price").val() != "") {
+                        var tx = db.transaction(["petTbl"], "readwrite");
+                        if (currentEdit == null) {
+                            var store = tx.objectStore("petTbl");
+                            var req = store.add({
+                                Name: $("#name").val(),
+                                Path: $("#path").val(),
+                                Price: $("#price").val()
+                            });
+                            req.onsuccess = function (e) {
+                                console.log("Added data...");
+                                readAll();
+                            }
+                        }
+                        else {
+                            var store = tx.objectStore("petTbl");
+                            var req = store.put({
+                                Name: $("#name").val(),
+                                Path: $("#path").val(),
+                                Price: $("#price").val(),
+                                id: currentEdit.id
+                            });
+                            req.onsuccess = function (e) {
+                                console.log("Updated data...");
+                                readAll();
+                            }
+                        }
+                        $("#add").val("Add New");
+                        currentEdit = null;
+                    }
+                    else {
+                        alert("Please fill up the all fields!!!");
+                    }
+                });
+            }
+        });
+
+        function readAll() {
+            $("#tbl tbody").empty();
+            var tx = db.transaction(["petTbl"], "readonly");
+            var req = tx.objectStore("petTbl").openCursor();
+            req.onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (!cursor) return;
+                $("#tbl tbody").append(
+                    "<tr>" +
+                    "<td>" + cursor.value.Name + "</td>" +
+                    "<td>" + cursor.value.Path + "</td>" +
+                    "<td>" + cursor.value.Price + "</td>" +
+                    "<td>" + "<button type='button' class='edit' data-key='" + cursor.key + "'>Edit</button>|<button type = 'button' class='delete' data-key='" + cursor.key + "'>Delete</button>" + "</td>" +
+                    "</tr>"
+                )
+                cursor.continue();
+            }
+            req.onerror = function (err) {
+                console.log(err);
+            }
+            //for delete
+            tx.oncomplete = function () {
+                $(".delete").click(function () {
+                    var id = $(this).attr('data-key');
+                    var row = $(this).parent().parent();
+                    var tx = db.transaction(["petTbl"], "readwrite");
+                    var store = tx.objectStore("petTbl");
+                    var req = store.delete(parseInt(id));
+                    req.onsuccess = function (e) {
+                        console.log("Data deleted successfullly!!!!");
+                        row.remove();
+                    }
+                })
+
+                //For edit
+                $(".edit").click(function (evt) {
+                    evt.preventDefault();
+                    fillForm($(this).attr('data-key'));
+                })
+            }
+        }
+
+        function fillForm(id) {
+            var t = db.transaction(["petTbl"], "readwrite");
+            var objStore = t.objectStore("petTbl");
+            var request = objStore.get(parseInt(id));
+            request.onsuccess = function (evt) {
+                currentEdit = request.result;
+                console.log(currentEdit);
+                $("#name").val(currentEdit.Name);
+                $("#path").val(currentEdit.Path);
+                $("#price").val(currentEdit.Price);
+                $("#add").val("Update");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Pet Food Website Design Tutorial</title>
+    
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/500ed785c2.js" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+
+        #header {
+            max-width: 100%;
+            height: auto;
+            background-color: white;
+        }
+
+            #header img {
+                height: 150px;
+                width: 200px;
+                top: -120px;
+                margin-bottom: 10px;
+            }
+
+     
+
+        #products {
+            width: 50%;
+            background-color: white;
+        }
+
+        .item {
+            width: 200px;
+            height: 300px;
+            background-color: #fbcd91;
+            box-shadow: initial;
+            padding:10px;
+            float: left;
+            padding:20px;
+            text-align: center;
+            text-transform: capitalize;
+            border:2px solid #808080;
+        }
+
+            .item img {
+                width: 140px;
+                height: 120px;
+                padding:10px;
+                
+            }
+
+        #menu ul {
+            list-style: none;
+            display: flex;
+            width: 100%;
+            padding: 10px;
+            color: black;
+            font-weight: 700;
+            background-color: antiquewhite;
+            justify-content: center;
+            margin-right: 100px;
+        }
+
+            #menu ul li {
+                margin: 20px;
+                padding: 15px;
+                height: 10px;
+                width: auto;
+            }
+
+                #menu ul li a {
+                    text-decoration: none;
+                    color: darkblue;
+                    font-size: 20px;
+                    font-weight: 800;
+                    width: auto;
+                }
+
+                #menu ul li:hover {
+                    background-color: #b7abab;
+                    border-radius: 40px;
+                }
+        .crbtn .cartBtn {
+            border: none;
+            text-align: center;
+            float: right;
+            margin-top: -100px;
+            margin-right: 50px;
+            text-decoration: unset;
+            border-radius: inherit;
+            padding: 20px 90px 0px 30px;
+            font-size: 40px;
+        }
+        
+
+        .cart {
+            padding: 20px 20px 20px 20px;
+            margin-top: -380px;
+            height: 300px;
+            width: 300px;
+            float: right;
+
+        }
+
+        .cart-header {
+            padding: 30px 20px 20px 20px;
+           
+            height: 300px;
+            width: 300px;
+            float: right;
+            background-color: yellow;
+            color: darkcyan;
+        }
+
+            .cart-header div {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            background-color: #0094ff;
+        }
+
+            .cart-item div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            /* item info */
+            .cart-item .item-info {
+                flex: 1;
+                background-color: antiquewhite;
+                border-radius: 0 10px 10px 0;
+                padding: 10px;
+            }
+
+                .cart-item .item-info:hover {
+                    background-color: rgba(255, 0, 0, 0.6);
+                    cursor: pointer;
+                }
+
+                .cart-item .item-info img {
+                    width: 100px;
+                    height: 200px;
+                    background-color: antiquewhite;
+                }
+            /* unit price */
+            .cart-item .unit-price {
+                flex: 1;
+                font-size: 1.2rem;
+                border-radius: 0 10px 10px 0;
+            }
+            /* units */
+            .cart-item .units {
+                flex: 1;
+            }
+
+                .cart-item .units .number {
+                    margin: 0 10px;
+                    font-size: 1.2rem;
+                }
+
+                .cart-item .units .btn {
+                    width: 20px;
+                    height: 20px;
+                    background-color: rgba(255, 0, 0, 0.6);
+                    border-radius: 50%;
+                    font-weight: bold;
+                    cursor: pointer;
+                }
+
+        /* cart footer */
+        .cart-footer {
+            width: 300px;
+            background-color: rgb(255, 21, 21);
+            position:absolute;
+            float:left;
+            margin-left:60px;
+            bottom: 0;
+            right: 0px;
+        }
+
+        .cart-item .unit-price {
+            background-color: antiquewhite;
+        }
+
+            .cart-item .unit-price:hover {
+                background-color: rgba(255, 0, 0, 0.6);
+                cursor: pointer;
+            }
+
+
+        .cart-footer div {
+            float:left;
+            margin-left:60px;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 0;
+            font-size: 1.3rem;
+        }
+
+        .cart-footer .subtotal {
+            background-color: white;
+        }
+
+        .cart-footer .checkout {
+            background-color: #ffd800;
+            
+            margin-bottom:10px;
+            font-size: 20px;
+            
+            font-weight: 700;
+        }
+        
+       
+      
+    </style>
+    <script src="Scripts/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div id="header">
+        <div class="container">
+
+            <div id="menu">
+                <ul>
+                    <li><a href="home.html"><i class="fa-solid fa-house-user"></i>HOME</a></li>
+                    <li><a href="#"><i class="fa-solid fa-tag"></i>PRODUCT LIST</a></li>
+                    <li><a href="about.html"><i class="fa-sharp fa-solid fa-address-card"></i>ABOUT US</a></li>
+                    <li><a href="contact.html"><i class="fa-sharp fa-solid fa-envelopes-bulk"></i>CONTACT US</a></li>
+
+
+                </ul>
+                <div class="crbtn">
+                    <button class="cartBtn"><a href="cart.html"><i class="fa-sharp fa-solid fa-cart-shopping"></i></a></button>
+
+                    <div class="search-form">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="search" id="search-box" placeholder="search here..."
+                               onkeyup="search()">
+                    </div>
+                </div>
+            </div>
+
+            <div id="body">
+
+                <div id="products">
+
+                    <div class="item">
+                        <h3>Cat Food</h3>
+                        <img src="image/whiskas-cat-food-tin-DRT8N0.jpg" />
+                        <p>Price:450tk</p>
+                        <button type="button">ADD TO CART</button>
+                    </div>
+
+                    <div class="item">
+                        <h3>CatCAN FOOD</h3>
+                        <img src="image/1336363-center-1-5f2b07e639691.jpg" />
+                        <p>Price:450tk</p>
+                        <button type="button">ADD TO CART</button>
+                    </div>
+                    <div class="item">
+                        <h3>z FOOD</h3>
+                        <img src="image/1336363-center-1-5f2b07e639691.jpg" />
+                        <p>Price:450tk</p>
+                        <button type="button">ADD TO CART</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+        
+        
+
+
+        <div class="cart">
+            <div class="cart-header">
+                <div class="column1">Item</div>
+                <div class="column2">Unit price</div>
+                <div class="column3">Units</div>
+            </div>
+            <div class="cart-items">
+                <!--cart items here -->
+                <!--<div class="cart-item">
+                <div class="item-info">
+                    
+                </div>
+                <div class="unit-price">
+                    <small>$</small>29.99
+                </div>
+                <div class="units">
+                    <div class="btn minus">-</div>
+                    <div class="number">1</div>
+                    <div class="btn plus">+</div>
+                </div>
+            </div>-->
+            </div>
+            <div class="cart-footer">
+                <div class="subtotal">
+                    Subtotal (0 items): $0
+                </div>
+                <button class="checkout">
+                    <a href="payment gateway/paymentGetway.html"</a>
+                    PROCCED TO CHECKOUT
+                </button>
+
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+            window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+            window.IDBCursor = window.IDBCursor || window.webkitIDBCursor;
+            window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+            var db;
+            var currentEdit = null;
+
+            $(document).ready(function () {
+                var openReq = indexedDB.open("PetDB", 1);
+                openReq.onupgradeneeded = function (e) {
+                    db = e.target.result;
+
+                    var store = db.createObjectStore("petTbl", { keyPath: "id", autoIncrement: true });
+                    console.log(store);
+                }
+
+                openReq.onsuccess = function (e) {
+                    db = e.target.result;
+                    console.log(db);
+                    readAll();
+                }
+            });
+
+
+
+
+            function readAll() {
+
+                var tx = db.transaction(["petTbl"], "readonly");
+                var req = tx.objectStore("petTbl").openCursor();
+                req.onsuccess = function (e) {
+                    var cursor = e.target.result;
+                    if (!cursor) return;
+                    $("#products").append(
+
+                        `<div class="item">
+                                    <h3>${cursor.value.Name}</h3>
+                                    <img src="image/${cursor.value.Path}" width:"150"; height:"150"/>
+                                    <p>Price:${cursor.value.Price}tk</p>
+                                    <button type="button" class="btn" data-product-id="${cursor.key}">ADD TO CART</button>
+                                </div>`
+                    )
+                    cursor.continue();
+                }
+                req.onerror = function (err) {
+                    console.log(err);
+                }
+            }
+
+        </script>
+
+        <!--Search-->
+        <script>
+            const search = () => {
+                const searchbox = document.getElementById("search-box").value.toUpperCase();
+                const storeItems = document.getElementById("products")
+                const product = document.querySelectorAll(".item")
+                const pname = storeItems.getElementsByTagName("h3")
+
+                for (var i = 0; i < pname.length; i++) {
+                    let match = product[i].getElementsByTagName("h3")[0];
+
+                    if (match) {
+                        let textvalue = match.textContent || match.innerHTML
+                        if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                            product[i].style.display = "";
+                        }
+                        else {
+                            product[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+        </script>
+
+        <!--Add to cart-->
+
+        <script src="cart.js"></script>
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Pet Food Website Design Tutorial</title>
+    
+
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://kit.fontawesome.com/500ed785c2.js" crossorigin="anonymous"></script>
+
+    <style type="text/css">
+        .container {
+            width: 100%;
+        }
+
+        #header {
+            max-width: 100%;
+            height: 150px;
+            background-color: burlywood;
+        }
+
+            #header img {
+                height: 150px;
+                width: 200px;
+                top: -120px;
+                margin-bottom: 10px;
+            }
+
+     
+
+        #products {
+            width: 100%;
+            background-color: white;
+        }
+
+        .item {
+            width: 200px;
+            height: 300px;
+            background-color: #fbcd91;
+            box-shadow: initial;
+            margin: 10px;
+            float: left;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+            .item img {
+                width: 150px;
+                height: 130px;
+            }
+
+        #menu ul {
+            list-style: none;
+            display: flex;
+            width: 100%;
+            padding: 10px;
+            color: black;
+            font-weight: 700;
+            background-color: antiquewhite;
+            justify-content: center;
+            margin-right: 100px;
+        }
+
+            #menu ul li {
+                margin: 20px;
+                padding: 15px;
+                height: 10px;
+                width: auto;
+            }
+
+                #menu ul li a {
+                    text-decoration: none;
+                    color: darkblue;
+                    font-size: 20px;
+                    font-weight: 800;
+                    width: auto;
+                }
+
+                #menu ul li:hover {
+                    background-color: #b7abab;
+                    border-radius: 40px;
+                }
+                .cart .cartBtn{
+                    border:none;
+                    text-align:center;
+                    float:right;
+                    margin-top:-100px;
+                    margin-right:50px;
+                    text-decoration:unset;
+                    border-radius:inherit;
+                    padding:20px 90px 0px 30px;
+                    font-size:40px;
+                    justify-content:center;
+                }
+      
+    </style>
+    <script src="Scripts/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <div class="container">
+
+        <div id="menu">
+            <ul>
+                <li><a href="home.html"><i class="fa-solid fa-house-user"></i>HOME</a></li>
+                <li><a href="#"><i class="fa-solid fa-tag"></i>PRODUCT LIST</a></li>
+                <li><a href="about.html"><i class="fa-sharp fa-solid fa-address-card"></i>ABOUT US</a></li>
+                <li><a href="contact.html"><i class="fa-sharp fa-solid fa-envelopes-bulk"></i>CONTACT US</a></li>
+
+
+            </ul>
+            <div class="cart">
+                <button class="cartBtn"><a href="cart.html"><i class="fa-sharp fa-solid fa-cart-shopping"></i></a></button>
+
+                <div class="search-form">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="search" id="search-box" placeholder="search here..."
+                           onkeyup="search()">
+                </div>
+            </div>
+        </div>
+
+        <div id="body">
+
+            <div id="products">
+
+                <div class="item">
+                    <h3>Cat Food</h3>
+                    <img src="image/whiskas-cat-food-tin-DRT8N0.jpg" />
+                    <p>Price:450tk</p>
+                    <button type="button"><a href="cart.html"></a>ADD TO CART</button>
+                </div>
+
+                <div class="item">
+                    <h3>CatCAN FOOD</h3>
+                    <img src="image/1336363-center-1-5f2b07e639691.jpg" />
+                    <p>Price:450tk</p>
+                    <button type="button"><a href="cart.html"></a>ADD TO CART</button>
+                </div>
+                <div class="item">
+                    <h3>z FOOD</h3>
+                    <img src="image/1336363-center-1-5f2b07e639691.jpg" />
+                    <p>Price:450tk</p>
+                    <button type="button"><a href="cart.html"></a>ADD TO CART</button>
+                </div>
+
+            </div>
+
+        </div>
+        
+        
+    <script type="text/javascript">
+        var indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+        window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction;
+        window.IDBCursor = window.IDBCursor || window.webkitIDBCursor;
+        window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange;
+
+        var db;
+        var currentEdit = null;
+
+        $(document).ready(function () {
+            var openReq = indexedDB.open("PetDB", 1);
+            openReq.onupgradeneeded = function (e) {
+                db = e.target.result;
+
+                var store = db.createObjectStore("petTbl", { keyPath: "id", autoIncrement: true });
+                console.log(store);
+            }
+
+            openReq.onsuccess = function (e) {
+                db = e.target.result;
+                console.log(db);
+                readAll();
+            }
+        });
+
+
+
+
+        function readAll() {
+
+            var tx = db.transaction(["petTbl"], "readonly");
+            var req = tx.objectStore("petTbl").openCursor();
+            req.onsuccess = function (e) {
+                var cursor = e.target.result;
+                if (!cursor) return;
+                $("#products").append(
+
+                    `<div class="item">
+                            <h3>${cursor.value.Name}</h3>
+                            <img src="image/${cursor.value.Path}" width:"150"; height:"150"/>
+                            <p>Price:${cursor.value.Price}tk</p>
+                            <button type="button" class="btn" id="product-id"><a href="cart.html">ADD TO CART</button>
+                        </div>`
+                )
+                cursor.continue();
+            }
+            req.onerror = function (err) {
+                console.log(err);
+            }
+        }
+
+    </script>
+
+    <!--Search-->
+    <script>
+        const search = () => {
+            const searchbox = document.getElementById("search-box").value.toUpperCase();
+            const storeItems = document.getElementById("products")
+            const product = document.querySelectorAll(".item")
+            const pname = storeItems.getElementsByTagName("h3")
+
+            for (var i = 0; i < pname.length; i++) {
+                let match = product[i].getElementsByTagName("h3")[0];
+
+                if (match) {
+                    let textvalue = match.textContent || match.innerHTML
+                    if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                        product[i].style.display = "";
+                    }
+                    else {
+                        product[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+    </script>
+
+    <!--Add to cart-->
+
+   <script src="cart.js"></script>
+
+
+
+
+
+
+</body>
+</html>
